@@ -17,6 +17,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Node Modules which can be reinstalled using NPM
+node_modules/
+
 # =========================
 # Operating System Files
 # =========================

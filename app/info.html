@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jobs Tracker</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script type="text/javascript">
+    var electron = require('electron');
+    var shell = electron.shell;
+    var ipc = electron.ipcRenderer;
+  </script>
+</head>
+<body id="page-info">
+  <main class="info-content">
+    <h3 class="page-headline">Clearline Job Tracker</h3>
+    <p>
+      A job tracking App for Clearline<br>
+      <strong>Version 0.5.0</strong><br>
+    </p>
+    <p><a href="#" onClick={ipc.sendSync('closeInfoWindow')}>close window</a></p>
+  </main>
+</body>
+</html>
