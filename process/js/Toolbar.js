@@ -15,6 +15,10 @@ var Toolbar = React.createClass({
             <span className="toolbar-item-button"></span>
             <span className="toolbar-item-text">Add Job</span>
           </div>
+          <div className="toolbar-item" onClick={this.openAllJobsWindow}>
+            <span className="toolbar-item-button"></span>
+            <span className="toolbar-item-text">View All Jobs</span>
+          </div>
         </div>
     );
   }

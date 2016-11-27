@@ -37,6 +37,7 @@ app.on('ready', function() {
     width: 1080,
     show: false
   }); //allJobsWindow
+  allJobsWindow.setMenu(null);
 
   allJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
 
@@ -48,10 +49,19 @@ app.on('ready', function() {
     appWindow.show();
   }); //ready-to-show
 
+  ipc.on('updatedData', function(event, arg){
+    allJobsWindow.reload();
+    appWindow.reload ();
+  }); //updatedData
+
+  ipc.on('openAllJobsWindow', function(event, arg){
+    if (!allJobsWindow.isVisible()) allJobsWindow.show();
+  });//Open allJobsWindow if not open
+
   ipc.on('openInfoWindow', function(event, arg){
     event.returnValue='';
     infoWindow.show();
-  }); //closeInfoWindow
+  }); //OpenInfoWindow
 
   ipc.on('closeInfoWindow', function(event, arg){
     event.returnValue='';
