@@ -26,9 +26,9 @@ var MainInterface = React.createClass({
   }, //getInitialState
 
   componentDidUpdate: function(){
-    fs.writeFile(jobsLocation, JSON.stringify(this.state.myJobs), 'utf8',
+    fs.writeFileSync(jobsLocation, JSON.stringify(this.state.myJobs), 'utf8',
       function(err){
-        ipc.sendSync('updatedData');
+        // ipc.sendSync('updatedJobsData');
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
         }
@@ -48,11 +48,13 @@ var MainInterface = React.createClass({
 
     fs.writeFile(completedLocation, JSON.stringify(loadCompleted), 'utf8',
      function(err){
-       ipc.sendSync('updatedData');
+        // ipc.sendSync('updatedCompletedData');
+        // console.log("componentDidUpdate");
        if (err){
          console.log("Saving Completed Jobs failed with error: " + err);
        }
      });
+
   }, //componentDidUpdate
 
   toggleTaskDisplay: function(){
@@ -70,6 +72,7 @@ var MainInterface = React.createClass({
       myJobs: tempJobs,
       taskBodyVisible: false
     })
+    ipc.sendSync("updatedJobsData");
   }, //addJob
 
   openAllJobsWindow: function(){
@@ -83,12 +86,13 @@ var MainInterface = React.createClass({
       myJobs: newJobs,
       completedJob: item
     });
+    ipc.sendSync("updatedJobsData");
   },//completeMessage
 
   moveItemUp: function(item){
     var allJobs = this.state.myJobs;
     var newItem = item;
-    newItem["jobNumber"] = item["jobNumber"]==1?1:item["jobNumber"]-1;
+    newItem["jobNumber"] = item["jobNumber"]==1?1:Number(item["jobNumber"])-1;
 
     var newJobs = _.without(allJobs, item);
     newJobs.push(newItem);
@@ -100,7 +104,7 @@ var MainInterface = React.createClass({
   moveItemDown: function(item){
     var allJobs = this.state.myJobs;
     var newItem = item;
-    newItem["jobNumber"] = item["jobNumber"]+1;
+    newItem["jobNumber"] = Number(item["jobNumber"])+1;
 
     var newJobs = _.without(allJobs, item);
     newJobs.push(newItem);

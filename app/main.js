@@ -49,9 +49,16 @@ app.on('ready', function() {
     appWindow.show();
   }); //ready-to-show
 
-  ipc.on('updatedData', function(event, arg){
+  ipc.on('updatedJobsData', function(event, arg){
     allJobsWindow.reload();
-    appWindow.reload ();
+    event.returnValue='';
+    // appWindow.reload();
+  }); //updatedData
+
+  ipc.on('updatedCompletedData', function(event, arg){
+    // allJobsWindow.reload();
+    // event.returnValue='';
+    // appWindow.reload ();
   }); //updatedData
 
   ipc.on('openAllJobsWindow', function(event, arg){
