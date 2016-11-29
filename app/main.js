@@ -13,7 +13,7 @@ function toggleWindow(whichWindow) {
 }
 
 app.on('ready', function() {
-  var appWindow, infoWindow, allJobsWindow;
+  var appWindow, infoWindow, allJobsWindow, completedJobsWindow;
   appWindow = new BrowserWindow({
     width: 1920,
     width: 1080,
@@ -45,17 +45,40 @@ app.on('ready', function() {
     allJobsWindow.show();
   }); //ready-to-show
 
+  completedJobsWindow = new BrowserWindow({
+    width: 1920,
+    width: 1080,
+    show: false
+  }); //allJobsWindow
+  completedJobsWindow.setMenu(null);
+
+  completedJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
+
+  completedJobsWindow.once('ready-to-show', function() {
+    allJobsWindow.show();
+  }); //ready-to-show
+
+
   appWindow.once('ready-to-show', function() {
     appWindow.show();
   }); //ready-to-show
 
-  ipc.on('updatedData', function(event, arg){
-    allJobsWindow.reload();
-    appWindow.reload ();
+  ipc.on('updatedJobsData', function(event, arg){
+    event.returnValue = '';
+    if (!allJobsWindow.isDestroyed()) allJobsWindow.reload();
+    appWindow.reload();
   }); //updatedData
 
+  ipc.on('updatedCompletedData', function(event, arg){
+    event.returnValue = '';
+    if(!completedJobsWindow.isDestroyed()) completedJobsWindow.reload();
+    appWindow.reload();
+  }); //updatedData
+
+
   ipc.on('openAllJobsWindow', function(event, arg){
-    if (!allJobsWindow.isVisible()) allJobsWindow.show();
+    event.returnValue='';
+    allJobsWindow.show();
   });//Open allJobsWindow if not open
 
   ipc.on('openInfoWindow', function(event, arg){

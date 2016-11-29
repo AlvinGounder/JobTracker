@@ -1,9 +1,6 @@
 var React = require('react');
 
 var TaskListAllJobs = React.createClass({
-  handleComplete: function(){
-    this.props.onComplete(this.props.whichItem);
-  },
   render: function(){
     return (
       <li className="task-item media">

@@ -28,13 +28,13 @@ var MainInterface = React.createClass({
   componentDidUpdate: function(){
     fs.writeFile(jobsLocation, JSON.stringify(this.state.myJobs), 'utf8',
       function(err){
-        ipc.sendSync('updatedData');
+        ipc.sendSync('updatedJobsData');
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
         }
     });
 
-    // console.log (loadCompleted);
+    console.table (this.state.completedJob);
     //The file is empty
     if (!loadCompleted){
         loadCompleted = this.state.completedJob;
@@ -48,7 +48,7 @@ var MainInterface = React.createClass({
 
     fs.writeFile(completedLocation, JSON.stringify(loadCompleted), 'utf8',
      function(err){
-       ipc.sendSync('updatedData');
+       ipc.sendSync('updatedCompletedData');
        if (err){
          console.log("Saving Completed Jobs failed with error: " + err);
        }
@@ -145,7 +145,7 @@ var MainInterface = React.createClass({
             handleToggle = {this.toggleTaskDisplay}
             addJob = {this.addJob}
             />
-          <AddJob
+          <openAllJobsWindow
             openAllJobsWindow = {this.openAllJobsWindow}
             />
           <div className="container">

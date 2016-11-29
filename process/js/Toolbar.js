@@ -4,6 +4,9 @@ var Toolbar = React.createClass({
   addJob: function(){
       this.props.handleToggle();
    }, //addJob
+   openAllJobsWindow: function(){
+       this.props.OpenAllJobsWindow();
+    }, //addJob
 
   render: function(){
     return(

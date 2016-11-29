@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Jobs</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="main">
+    <div class="page" id="jobpriority">
+      <div id="Tasks">
+        <h2>Job Tracker App - All Jobs loading...</h2>
+      </div>
+    </div><!-- Job Priority -->
+  </div><!-- Main -->
+  <script type="text/javascript">
+    var eRequire = require;
+    var dirName = __dirname;
+    var completedJobsLocation = require('path').resolve(__dirname, '..', 'data', 'completed.json');
+  </script>
+  <script src="js/renderCompletedJobs.js"></script>
+</body>
+</html>

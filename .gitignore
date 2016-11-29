@@ -20,6 +20,11 @@ $RECYCLE.BIN/
 # Node Modules which can be reinstalled using NPM
 node_modules/
 
+#gulp processed modules
+app/css/
+app/fonts/
+app/js/render*.js
+
 # =========================
 # Operating System Files
 # =========================
