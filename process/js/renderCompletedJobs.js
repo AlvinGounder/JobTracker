@@ -14,22 +14,22 @@ var TaskList = require('./TaskListCompletedJobs');
 var MainInterface = React.createClass({
   getInitialState: function(){
     return {
-      myJobs: loadCompletedJobs,
+      myCompletedJobs: loadCompletedJobs,
       orderBy: 'jobNumber',
       direction: 'asc',
     }
   }, //getInitialState
 
   render: function(){
-    var myJobs = this.state.myJobs;
+    var myCompletedJobs = this.state.myCompletedJobs;
     var orderBy = this.state.orderBy;
     var orderDirection = this.state.direction;
 
-   myJobs = _.orderBy(myJobs, function(item){
+   myCompletedJobs = _.orderBy(myCompletedJobs, function(item){
      return item[orderBy];
    }, orderDirection);
 
-    myJobs = myJobs.map(function(item, index){
+    myCompletedJobs = myCompletedJobs.map(function(item, index){
       return (
         <TaskList key = {index}
           singleItem = {item}
@@ -44,7 +44,7 @@ var MainInterface = React.createClass({
            <div className="row">
              <div className="jobs col-sm-12">
                <h2 className="jobs-headline">Completed Jobs</h2>
-               <ol className="item-list media-list">{myJobs}</ol>
+               <ol className="item-list media-list">{myCompletedJobs}</ol>
              </div>{/* col-sm-12 */}
            </div>{/* row */}
           </div>{/* container */}
