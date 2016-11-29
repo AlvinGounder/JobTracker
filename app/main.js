@@ -13,7 +13,7 @@ function toggleWindow(whichWindow) {
 }
 
 app.on('ready', function() {
-  var appWindow, infoWindow, allJobsWindow;
+  var appWindow, infoWindow, allJobsWindow, completedJobsWindow;
   appWindow = new BrowserWindow({
     width: 1920,
     width: 1080,
@@ -41,8 +41,21 @@ app.on('ready', function() {
 
   allJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
 
+  completedJobsWindow = new BrowserWindow({
+    width: 1920,
+    width: 1080,
+    show: false
+  }); //completedJobsWindow
+  // completedJobsWindow.setMenu(null);
+
+  completedJobsWindow.loadURL('file://' + __dirname + '/completedJobs.html');
+
   allJobsWindow.once('ready-to-show', function() {
     allJobsWindow.show();
+  }); //ready-to-show
+
+  allJobsWindow.once('ready-to-show', function() {
+    completedJobsWindow.show();
   }); //ready-to-show
 
   appWindow.once('ready-to-show', function() {
