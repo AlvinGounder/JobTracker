@@ -28,32 +28,26 @@ var MainInterface = React.createClass({
   componentDidUpdate: function(){
     fs.writeFileSync(jobsLocation, JSON.stringify(this.state.myJobs), 'utf8',
       function(err){
-        // ipc.sendSync('updatedJobsData');
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
         }
     });
 
     // console.log (loadCompleted);
-    //The file is empty
-    if (!loadCompleted){
-        loadCompleted = this.state.completedJob;
-        // console.log("the file was empty");
-    }
-    //The file is NOT empty so add new JSON data
-    else {
-        loadCompleted.push(this.state.completedJob);
+    if (this.state.completedJob["jobNumber"] !== null) {
+      loadCompleted.push(this.state.completedJob);
+
+      fs.writeFile(completedLocation, JSON.stringify(loadCompleted), 'utf8', (err) => {
+         if (err){
+           console.log("Saving Completed Jobs failed with error: " + err);
+         }
+         console.log("setting completedJob to Null");
+         this.setState({
+           completedJob: null
+         })
+       });
     }
     // console.log("stringified JSON: " + JSON.stringify(loadCompleted, 'utf8'));
-
-    fs.writeFile(completedLocation, JSON.stringify(loadCompleted), 'utf8',
-     function(err){
-        // ipc.sendSync('updatedCompletedData');
-        // console.log("componentDidUpdate");
-       if (err){
-         console.log("Saving Completed Jobs failed with error: " + err);
-       }
-     });
 
   }, //componentDidUpdate
 
@@ -82,6 +76,7 @@ var MainInterface = React.createClass({
   completeMessage: function(item){
     var allJobs = this.state.myJobs;
     var newJobs = _.without(allJobs, item);
+    console.log("In the Jobs Complete");
     this.setState ({
       myJobs: newJobs,
       completedJob: item

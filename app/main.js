@@ -69,8 +69,8 @@ app.on('ready', function() {
   }); //updatedData
 
   ipc.on('updatedCompletedData', function(event, arg){
-    // allJobsWindow.reload();
-    // event.returnValue='';
+    completedJobsWindow.reload();
+    event.returnValue='';
     // appWindow.reload ();
   }); //updatedData
 
