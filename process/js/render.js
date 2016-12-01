@@ -82,6 +82,7 @@ var MainInterface = React.createClass({
       completedJob: item
     });
     ipc.sendSync("updatedJobsData");
+    ipc.sendSync("updatedCompletedData");
   },//completeMessage
 
   moveItemUp: function(item){
@@ -150,7 +151,7 @@ var MainInterface = React.createClass({
           <div className="container">
            <div className="row">
              <div className="jobs col-sm-12">
-               <h2 className="jobs-headline">Current Jobs</h2>
+               <h2 className="jobs-headline">View and Add Jobs</h2>
                <ol className="item-list media-list">{myJobs}</ol>
              </div>{/* col-sm-12 */}
            </div>{/* row */}
