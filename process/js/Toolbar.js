@@ -5,6 +5,14 @@ var Toolbar = React.createClass({
       this.props.handleToggle();
    }, //addJob
 
+   openAllJobsWindow: function(){
+     this.props.openAllJobsWindow();
+   }, //openAllJobsWindow
+
+   openCompletedJobsWindow: function(){
+     this.props.openCompletedJobsWindow();
+   }, //openAllJobsWindow
+
   render: function(){
     return(
         <div className="toolbar">
@@ -17,7 +25,11 @@ var Toolbar = React.createClass({
           </div>
           <div className="toolbar-item" onClick={this.openAllJobsWindow}>
             <span className="toolbar-item-button"></span>
-            <span className="toolbar-item-text">View All Jobs</span>
+            <span className="toolbar-item-text">Show All Jobs</span>
+          </div>
+          <div className="toolbar-item" onClick={this.openCompletedJobsWindow}>
+            <span className="toolbar-item-button"></span>
+            <span className="toolbar-item-text">Show Completed Jobs</span>
           </div>
         </div>
     );

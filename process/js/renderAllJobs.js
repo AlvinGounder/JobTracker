@@ -43,7 +43,7 @@ var MainInterface = React.createClass({
           <div className="container">
            <div className="row">
              <div className="jobs col-sm-12">
-               <h2 className="jobs-headline">Current Jobs</h2>
+               <h2 className="jobs-headline">All Jobs Schedule</h2>
                <ol className="item-list media-list">{myJobs}</ol>
              </div>{/* col-sm-12 */}
            </div>{/* row */}

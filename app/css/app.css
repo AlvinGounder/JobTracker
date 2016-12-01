@@ -321,8 +321,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
-  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
+  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
+  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
 }
 
 .glyphicon {
@@ -8367,7 +8367,7 @@ h6 {
 
 .main-allJobs {
   background: white;
-  height: 790px;
+  /*height: 790px;*/
 }
 
 /** Toolbar **/
@@ -8394,7 +8394,7 @@ h6 {
 }
 
 .toolbar-logo {
-  width: 125px;
+  width: 160px;
   display: block;
   margin-left: auto;
   margin-right: auto;

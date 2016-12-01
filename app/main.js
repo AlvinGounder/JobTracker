@@ -12,6 +12,7 @@ function toggleWindow(whichWindow) {
   }
 }
 
+
 app.on('ready', function() {
   var appWindow, infoWindow, allJobsWindow, completedJobsWindow;
   appWindow = new BrowserWindow({
@@ -46,7 +47,7 @@ app.on('ready', function() {
     width: 1080,
     show: false
   }); //completedJobsWindow
-  // completedJobsWindow.setMenu(null);
+  completedJobsWindow.setMenu(null);
 
   completedJobsWindow.loadURL('file://' + __dirname + '/completedJobs.html');
 
@@ -54,7 +55,7 @@ app.on('ready', function() {
     allJobsWindow.show();
   }); //ready-to-show
 
-  allJobsWindow.once('ready-to-show', function() {
+  completedJobsWindow.once('ready-to-show', function() {
     completedJobsWindow.show();
   }); //ready-to-show
 
@@ -62,21 +63,51 @@ app.on('ready', function() {
     appWindow.show();
   }); //ready-to-show
 
+  appWindow.focus();
+
   ipc.on('updatedJobsData', function(event, arg){
-    allJobsWindow.reload();
+    if (!allJobsWindow.isDestroyed()){
+      allJobsWindow.reload();
+    }
     event.returnValue='';
     // appWindow.reload();
   }); //updatedData
 
   ipc.on('updatedCompletedData', function(event, arg){
-    completedJobsWindow.reload();
+    if(!completedJobsWindow.isDestroyed()){
+      completedJobsWindow.reload();
+    }
     event.returnValue='';
     // appWindow.reload ();
   }); //updatedData
 
   ipc.on('openAllJobsWindow', function(event, arg){
-    if (!allJobsWindow.isVisible()) allJobsWindow.show();
+    if(allJobsWindow.isDestroyed()) {
+      allJobsWindow = new BrowserWindow({
+        width: 1920,
+        width: 1080,
+        show: false
+      }); //allJobsWindow
+      allJobsWindow.setMenu(null);
+      allJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
+      allJobsWindow.show();
+    }
+    event.returnValue='';
   });//Open allJobsWindow if not open
+
+  ipc.on('openCompletedJobsWindow', function(event, arg){
+    if(completedJobsWindow.isDestroyed()) {
+      completedJobsWindow = new BrowserWindow({
+        width: 1920,
+        width: 1080,
+        show: false
+      }); //completedJobsWindow
+      completedJobsWindow.setMenu(null);
+      completedJobsWindow.loadURL('file://' + __dirname + '/completedJobs.html');
+      completedJobsWindow.show();
+    }
+    event.returnValue='';
+  });//Open completedJobsWindow if not open
 
   ipc.on('openInfoWindow', function(event, arg){
     event.returnValue='';

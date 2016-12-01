@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-allJobs {
   background: white;
-  height: 790px;
+  /*height: 790px;*/
 }
 /** Toolbar **/
 
@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .toolbar-logo {
-  width: 125px;
+  width: 160px;
   display: block;
   margin-left: auto;
   margin-right: auto;

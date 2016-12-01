@@ -34,14 +34,14 @@ var MainInterface = React.createClass({
     });
 
     // console.log (loadCompleted);
-    if (this.state.completedJob["jobNumber"] !== null) {
+    if (this.state.completedJob != null && this.state.completedJob["jobNumber"] !== null) {
       loadCompleted.push(this.state.completedJob);
 
       fs.writeFile(completedLocation, JSON.stringify(loadCompleted), 'utf8', (err) => {
          if (err){
            console.log("Saving Completed Jobs failed with error: " + err);
          }
-         console.log("setting completedJob to Null");
+        //  console.log("setting completedJob to Null");
          this.setState({
            completedJob: null
          })
@@ -73,6 +73,10 @@ var MainInterface = React.createClass({
     ipc.sendSync("openAllJobsWindow");
   }, //openAllJobsWindow
 
+  openCompletedJobsWindow: function(){
+    ipc.sendSync("openCompletedJobsWindow");
+  }, //openAllJobsWindow
+
   completeMessage: function(item){
     var allJobs = this.state.myJobs;
     var newJobs = _.without(allJobs, item);
@@ -95,6 +99,7 @@ var MainInterface = React.createClass({
     this.setState ({
       myJobs: newJobs
     });
+    ipc.sendSync("updatedJobsData");
   },//moveItemUp
 
   moveItemDown: function(item){
@@ -107,6 +112,7 @@ var MainInterface = React.createClass({
     this.setState ({
       myJobs: newJobs
     });
+    ipc.sendSync("updatedJobsData");
   },//moveItemDown
 
   render: function(){
@@ -140,13 +146,13 @@ var MainInterface = React.createClass({
     return (
       <div className="application">
         <div className="interface">
-          <Toolbar handleToggle = {this.toggleTaskDisplay}   />
+          <Toolbar handleToggle = {this.toggleTaskDisplay}
+            openAllJobsWindow = {this.openAllJobsWindow}
+            openCompletedJobsWindow = {this.openCompletedJobsWindow}
+          />
           <AddJob
             handleToggle = {this.toggleTaskDisplay}
             addJob = {this.addJob}
-            />
-          <AddJob
-            openAllJobsWindow = {this.openAllJobsWindow}
             />
           <div className="container">
            <div className="row">
