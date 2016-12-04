@@ -47,7 +47,7 @@ app.on('ready', function() {
     width: 1080,
     show: false
   }); //completedJobsWindow
-  completedJobsWindow.setMenu(null);
+  // completedJobsWindow.setMenu(null);
 
   completedJobsWindow.loadURL('file://' + __dirname + '/completedJobs.html');
 
@@ -92,8 +92,8 @@ app.on('ready', function() {
         width: 1080,
         show: false
       }); //allJobsWindow
-      allJobsWindow.setMenu(null);
       allJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
+      allJobsWindow.setMenu(null);
       allJobsWindow.show();
     }
     event.returnValue='';

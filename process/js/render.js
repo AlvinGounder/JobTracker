@@ -13,12 +13,14 @@ var ReactDOM = require('react-dom');
 var TaskList = require('./TaskList');
 var Toolbar = require('./Toolbar');
 var AddJob = require('./AddJob');
+var HeaderNav = require('./HeaderNav');
 
 var MainInterface = React.createClass({
   getInitialState: function(){
     return {
       myJobs: loadJobs,
       myCompletedJobs: loadCompleted,
+      queryText: '',
       orderBy: 'jobNumber',
       direction: 'asc',
       taskBodyVisible: false
@@ -69,6 +71,12 @@ var MainInterface = React.createClass({
     ipc.sendSync("updatedJobsData");
   }, //addJob
 
+  searchJobs: function(query){
+    this.setState({
+      queryText: query
+    });
+  },//searchJobs
+
   openAllJobsWindow: function(){
     ipc.sendSync("openAllJobsWindow");
   }, //openAllJobsWindow
@@ -116,6 +124,9 @@ var MainInterface = React.createClass({
   },//moveItemDown
 
   render: function(){
+    var filteredJobs = [];
+    var queryText = this.state.queryText;
+
     var myJobs = this.state.myJobs;
     var myCompletedJobs = this.state.myCompletedJobs;
     var orderBy = this.state.orderBy;
@@ -131,20 +142,29 @@ var MainInterface = React.createClass({
      return parseInt(item[orderBy]);
    }, orderDirection);
 
-    myJobs = myJobs.map(function(item, index){
-      return (
-        <TaskList key = {index}
-          singleItem = {item}
-          whichItem = {item}
-          onComplete = {this.completeMessage}
-          onMoveUp = {this.moveItemUp}
-          onMoveDown = {this.moveItemDown}
-        />
-      )
-    }.bind(this));
+   for (var i = 0; i < myJobs.length; i++) {
+     if (myJobs[i].jobName.toLowerCase().indexOf(queryText) != -1){
+       filteredJobs.push(myJobs[i]);
+     }
+   }
+
+  filteredJobs = filteredJobs.map(function(item, index){
+    return (
+      <TaskList key = {index}
+        singleItem = {item}
+        whichItem = {item}
+        onComplete = {this.completeMessage}
+        onMoveUp = {this.moveItemUp}
+        onMoveDown = {this.moveItemDown}
+      />
+    )
+  }.bind(this));
 
     return (
       <div className="application">
+        <HeaderNav
+          onSearch = {this.searchJobs}
+        />
         <div className="interface">
           <Toolbar handleToggle = {this.toggleTaskDisplay}
             openAllJobsWindow = {this.openAllJobsWindow}
@@ -158,7 +178,7 @@ var MainInterface = React.createClass({
            <div className="row">
              <div className="jobs col-sm-12">
                <h2 className="jobs-headline">View and Add Jobs</h2>
-               <ol className="item-list media-list">{myJobs}</ol>
+               <ol className="item-list media-list">{filteredJobs}</ol>
              </div>{/* col-sm-12 */}
            </div>{/* row */}
           </div>{/* container */}
