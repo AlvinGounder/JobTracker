@@ -26,7 +26,7 @@ var MainInterface = React.createClass({
     var orderDirection = this.state.direction;
 
    myCompletedJobs = _.orderBy(myCompletedJobs, function(item){
-     return item[orderBy];
+     return parseInt(item[orderBy]);
    }, orderDirection);
 
     myCompletedJobs = myCompletedJobs.map(function(item, index){

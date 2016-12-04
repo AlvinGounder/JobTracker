@@ -128,7 +128,7 @@ var MainInterface = React.createClass({
     }
 
    myJobs = _.orderBy(myJobs, function(item){
-     return item[orderBy];
+     return parseInt(item[orderBy]);
    }, orderDirection);
 
     myJobs = myJobs.map(function(item, index){

@@ -139,7 +139,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .jobs {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .jobs .jobs-headline {
@@ -152,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   list-style-type: decimal-leading-zero;
   font-size: 1.5rem;
-  line-height: 120%;
+  line-height: 115%;
 }
 
 .item-list .media {
@@ -165,6 +165,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .item-list .task-item {
   padding: 0px;
+
 }
 
 
@@ -198,7 +199,7 @@ h1, h2, h3, h4, h5, h6 {
 .item-list .task-name {
   font-weight: bold;
   color: Black;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
 .item-list .taskType-label {
@@ -212,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
   color: Blue;
   font-size: 1em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-left: 20px;
 }
 
@@ -249,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
 .item-list .task-date-item {
   font-weight: bold;
   color: Blue;
-  font-size: 1.5em;
+  font-size: 1.4em;
   margin-left: 100px;
 }
 

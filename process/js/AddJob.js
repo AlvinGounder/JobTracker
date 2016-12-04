@@ -4,20 +4,30 @@ var AddJob = React.createClass({
   toggleTaskDisplay: function(){
       this.props.handleToggle();
   },
-
+  formatToDisplayDate: function (date){
+    var daysInWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var formatDate = new Date(date);
+    return daysInWeek[formatDate.getDay()] + " " + formatDate.getDate() + "-" + (formatDate.getMonth()+1) + "-" + formatDate.getFullYear();
+  },
   handleAdd: function(e){
     e.preventDefault();
     var hwChecked = this.inputHW.checked?"YES":"";
+    var doorTypeText = !this.inputDoorTypeText.value?"":" *" + this.inputDoorTypeText.value;
+    var jambTypeText = !this.inputJambTypeText.value==null?"":" *" + this.inputJambTypeText.value;
+
+    var cavityDueDisplayDate = this.inputCavityDueDate.value==null?"":this.formatToDisplayDate(this.inputCavityDueDate.value);
+    var jobDueDisplayDate = this.inputJobDueDate.value==null?"":this.formatToDisplayDate(this.inputJobDueDate.value);
+    // console.log((new Date(cavityDueDisplayDate)).toUTCString());
 
     var tempJob = {
       jobNumber : this.inputJobNumber.value,
       jobName : this.inputJobName.value,
-      doorType : this.inputDoorType.value,
-      jambType : this.inputJambType.value,
+      doorType : this.inputDoorType.value + doorTypeText,
+      jambType : this.inputJambType.value + jambTypeText,
       SCS : this.inputSCS.value,
       DCS : this.inputDCS.value,
-      jobDueDate : this.inputJobDueDate.value,
-      cavityDueDate : this.inputCavityDueDate.value,
+      jobDueDate : jobDueDisplayDate,
+      cavityDueDate : cavityDueDisplayDate,
       hardware : hwChecked,
       SSL : this.inputSSL.value,
       DSL : this.inputDSL.value,
@@ -72,7 +82,7 @@ var AddJob = React.createClass({
               </div>
               <div className="form-group">
                 <label className="col-sm-3 control-label" htmlFor="doorType">Door Type</label>
-                <div className="col-sm-6">
+                <div className="col-sm-5">
                   <select className="form-control" id="doorType" ref={(ref) => this.inputDoorType = ref}>
                     <option value="Flush Panel">Flush Panel</option>
                     <option value="Flush Panel  4.75">Flush Panel  4.75</option>
@@ -135,10 +145,14 @@ var AddJob = React.createClass({
                     <option value=" ">-----------------------</option>
                   </select>
                 </div>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control"
+                    id="doorTypeText" ref={(ref) => this.inputDoorTypeText= ref} />
+                </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3 control-label" htmlFor="jambType">Jamb Type</label>
-                <div className="col-sm-6">
+                <div className="col-sm-5">
                   <select className="form-control" id="jambType" ref={(ref) => this.inputJambType = ref}>
                     <option value="Flat for Architrave 18">Flat for Architrave 18</option>
                     <option value="Flat double groove 18">Flat double groove 18</option>
@@ -155,6 +169,10 @@ var AddJob = React.createClass({
                     <option value="Archfast 60mm Col">Archfast 60mm Col</option>
                     <option value="Archfast 65mm Gov">Archfast 65mm Gov</option>
                   </select>
+                </div>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control"
+                    id="jambTypeText" ref={(ref) => this.inputJambTypeText= ref} />
                 </div>
               </div>
               <div className="form-group">
