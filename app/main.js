@@ -65,6 +65,10 @@ app.on('ready', function() {
 
   appWindow.focus();
 
+  appWindow.on("closed", (e) => {
+      app.quit();
+  });
+
   ipc.on('updatedJobsData', function(event, arg){
     if (!allJobsWindow.isDestroyed()){
       allJobsWindow.reload();

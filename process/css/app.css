@@ -77,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .interface {
   display: flex;
-  background: aqua;
+  /*background: rgba(0,255,0,.5);*/
 }
 
 .toolbar {
@@ -169,13 +169,13 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .item-list .task-item:nth-child(odd) {
-    background: rgba(255,255,0,.5);
-    border-radius: 5px;
+    background: rgba(0,255,0,.5);
+    border-radius: 1px;
 }
 
 .item-list .task-item:nth-child(even) {
-    background: rgba(0,255,255,.5);
-    border-radius: 5px;
+    background: white;
+    border-radius: 1px;
 }
 
 
@@ -197,8 +197,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .item-list .task-name {
   font-weight: bold;
-  color: #296B73;
-  font-size: 1em;
+  color: Black;
+  font-size: 1.5em;
 }
 
 .item-list .taskType-label {
@@ -211,6 +211,7 @@ h1, h2, h3, h4, h5, h6 {
 .item-list .taskType-item {
   color: Blue;
   font-size: 1em;
+  font-weight: bold;
   margin-bottom: 10px;
   margin-left: 20px;
 }
@@ -230,6 +231,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .item-list .task-notes {
   font-style: normal;
+  color: red;
 }
 
 .item-list .label-item {
@@ -241,13 +243,13 @@ h1, h2, h3, h4, h5, h6 {
 .item-list .task-date-label {
   color: black;
   font-weight: normal;
-  font-size: 1em;
+  /*font-size: 1.5em;*/
 }
 
 .item-list .task-date-item {
   font-weight: bold;
   color: Blue;
-  font-size: 1em;
+  font-size: 1.5em;
   margin-left: 100px;
 }
 

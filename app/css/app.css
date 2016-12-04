@@ -321,8 +321,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
-  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
+  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
+  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
 }
 
 .glyphicon {
@@ -8374,7 +8374,7 @@ h6 {
 
 .interface {
   display: flex;
-  background: aqua;
+  /*background: rgba(0,255,0,.5);*/
 }
 
 .toolbar {
@@ -8465,13 +8465,13 @@ h6 {
 }
 
 .item-list .task-item:nth-child(odd) {
-  background: rgba(255,255,0,.5);
-  border-radius: 5px;
+  background: rgba(0,255,0,.5);
+  border-radius: 1px;
 }
 
 .item-list .task-item:nth-child(even) {
-  background: rgba(0,255,255,.5);
-  border-radius: 5px;
+  background: white;
+  border-radius: 1px;
 }
 
 .item-list .task-item:last-child {
@@ -8491,8 +8491,8 @@ h6 {
 
 .item-list .task-name {
   font-weight: bold;
-  color: #296B73;
-  font-size: 1em;
+  color: Black;
+  font-size: 1.5em;
 }
 
 .item-list .taskType-label {
@@ -8505,6 +8505,7 @@ h6 {
 .item-list .taskType-item {
   color: Blue;
   font-size: 1em;
+  font-weight: bold;
   margin-bottom: 10px;
   margin-left: 20px;
 }
@@ -8524,6 +8525,7 @@ h6 {
 
 .item-list .task-notes {
   font-style: normal;
+  color: red;
 }
 
 .item-list .label-item {
@@ -8535,13 +8537,13 @@ h6 {
 .item-list .task-date-label {
   color: black;
   font-weight: normal;
-  font-size: 1em;
+  /*font-size: 1.5em;*/
 }
 
 .item-list .task-date-item {
   font-weight: bold;
   color: Blue;
-  font-size: 1em;
+  font-size: 1.5em;
   margin-left: 100px;
 }
 
