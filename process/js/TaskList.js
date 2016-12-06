@@ -10,6 +10,9 @@ var TaskList = React.createClass({
   handleMoveDown: function(){
     this.props.onMoveDown(this.props.whichItem);
   },
+  handleEdit: function(){
+    this.props.onEdit(this.props.whichItem);
+  },
   render: function(){
     return (
       <li className="task-item media">
@@ -26,6 +29,11 @@ var TaskList = React.createClass({
         <div className="media-left">
           <button className="task-complete btn btn-xs btn-danger" onClick={this.handleMoveDown}>
             Down
+          </button>
+        </div>
+        <div className="media-left">
+          <button className="task-complete btn btn-xs btn-danger" onClick={this.handleEdit}>
+            Edit
           </button>
         </div>
         <div className="task-info media-body">

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Job</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="main-editJob">
+    <div class="page" id="jobpriority">
+      <div id="Tasks">
+        <h2>Edit Job loading...</h2>
+      </div>
+    </div><!-- Job Priority -->
+  </div><!-- Main -->
+  <script type="text/javascript">
+    var eRequire = require;
+    var dirName = __dirname;
+    var editJobLocation = require('path').resolve(__dirname, '..', 'data', 'editJob.json');
+    var jobsLocation = require('path').resolve(__dirname, '..', 'data', 'jobs.json');
+    // var completedLocation = require('path').resolve(__dirname, '..', 'data', 'completed.json');
+  </script>
+  <script src="js/renderEditJob.js"></script>
+</body>
+</html>

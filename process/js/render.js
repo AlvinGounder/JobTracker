@@ -5,6 +5,7 @@ var fs = eRequire('fs');
 var loadJobs = JSON.parse(fs.readFileSync(jobsLocation));
 var loadCompleted = JSON.parse(fs.readFileSync(completedLocation));
 
+
 var electron = eRequire('electron');
 var ipc = electron.ipcRenderer;
 
@@ -123,6 +124,20 @@ var MainInterface = React.createClass({
     ipc.sendSync("updatedJobsData");
   },//moveItemDown
 
+  editJob: function(item){
+    var editJob = JSON.parse(fs.readFileSync(editJobLocation));
+    editJob.push(item);
+    // console.log(editJob);
+    fs.writeFileSync(editJobLocation, JSON.stringify(editJob), 'utf8',
+      function(err){
+        if (err) {
+          console.log("Saving Edit Jobs failed with error: " + err);
+        }
+    });
+    item = null;
+    ipc.sendSync("editJob");
+  },
+
   render: function(){
     var filteredJobs = [];
     var queryText = this.state.queryText;
@@ -156,6 +171,7 @@ var MainInterface = React.createClass({
         onComplete = {this.completeMessage}
         onMoveUp = {this.moveItemUp}
         onMoveDown = {this.moveItemDown}
+        onEdit = {this.editJob}
       />
     )
   }.bind(this));

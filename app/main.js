@@ -14,7 +14,7 @@ function toggleWindow(whichWindow) {
 
 
 app.on('ready', function() {
-  var appWindow, infoWindow, allJobsWindow, completedJobsWindow;
+  var appWindow, infoWindow, allJobsWindow, completedJobsWindow, editJobWindow;
   appWindow = new BrowserWindow({
     width: 1920,
     width: 1080,
@@ -118,10 +118,34 @@ app.on('ready', function() {
     infoWindow.show();
   }); //OpenInfoWindow
 
+  ipc.on("exitEditWindow", function(event, arg){
+    editJobWindow.close();
+    event.returnValue='';
+  });
+
   ipc.on('closeInfoWindow', function(event, arg){
     event.returnValue='';
     infoWindow.hide();
   }); //closeInfoWindow
 
+
+  ipc.on('editJob', function(event, arg){
+    editJobWindow = new BrowserWindow({
+      width: 800,
+      height: 550,
+      show: false,
+      parent: appWindow,
+      modal: true
+      // frame: false
+    }); //infoWindow
+    editJobWindow.loadURL('file://' + __dirname + '/editJob.html');
+    editJobWindow.webContents.send('theEditJob', arg);
+
+    editJobWindow.once('ready-to-show', function() {
+      editJobWindow.show();
+    }); //ready-to-show
+
+    event.returnValue='';
+  });
 
 }); //app is ready
