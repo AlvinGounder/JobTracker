@@ -19,6 +19,8 @@ var MainInterface = React.createClass({
         var jobDueDate = this.formatFromDisplayDate(loadEditJob[0].jobDueDate);
         var cavityDueDate = this.formatFromDisplayDate(loadEditJob[0].cavityDueDate);
 
+        // console.log("jobDue: " + jobDueDate);
+        // console.log("cavityDue: " + cavityDueDate);
         var hardware = !loadEditJob[0].hardware=="YES"?false:true;
         /*  -- End Format -- */
 
@@ -53,8 +55,12 @@ var MainInterface = React.createClass({
     // console.log ("updateJobs: " + JSON.stringify(updatedJobs));
     var editedJob = this.state.editJob;
     /* -- Pre-Save formatting --*/
-    editedJob.jobDueDate    = this.formatToDisplayDate(this.state.editJob.jobDueDate);
-    editedJob.cavityDueDate = this.formatToDisplayDate(this.state.editJob.cavityDueDate);
+    console.log(this.state.editJob.jobDueDate);
+    console.log(this.state.editJob.cavityDueDate);
+    editedJob.jobDueDate    = !this.state.editJob.jobDueDate?"":this.formatToDisplayDate(this.state.editJob.jobDueDate);
+    editedJob.cavityDueDate = !this.state.editJob.cavityDueDate?"":this.formatToDisplayDate(this.state.editJob.cavityDueDate);
+    if (editedJob.cavityDueDate.indexOf("NaN-NaN-NaN")) editedJob.cavityDueDate="";
+
     editedJob.hardware      = this.state.editJob.hardware?"YES":"";
 
     /* -- Finished Pre-Save formatting */
@@ -63,13 +69,13 @@ var MainInterface = React.createClass({
     updatedJobs.push(editedJob);
 
     //Write the Updated Jobs list to the file
-    console.log ("To be written: " + JSON.stringify(updatedJobs));
+    // console.log ("To be written: " + JSON.stringify(updatedJobs));
     fs.writeFileSync(jobsLocation, JSON.stringify(updatedJobs), 'utf8',
       function(err){
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
         }
-        console.log("Saved File");
+        // console.log("Saved File");
     });
 
 

@@ -55,9 +55,9 @@ var TaskList = React.createClass({
           </div>
           <div className="taskType-item">
             <span className="taskType-label">SCS: </span> {this.props.singleItem.SCS}
-            <span className="taskType-spacer">   </span>
+            <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">DCS: </span> {this.props.singleItem.DCS}
-            <span className="taskType-spacer">   </span>
+            <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">SSL: </span> {this.props.singleItem.SSL}
             <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">DSL: </span> {this.props.singleItem.DSL}

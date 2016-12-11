@@ -8436,11 +8436,11 @@ h6 {
 }
 
 .jobs {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .jobs .jobs-headline {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #174152;
 }
 
@@ -8544,7 +8544,11 @@ h6 {
   font-weight: bold;
   color: Blue;
   font-size: 1.4em;
-  margin-left: 100px;
+  margin-left: 30px;
+}
+
+.row {
+  min-width: 1300px;
 }
 
 #page-info {

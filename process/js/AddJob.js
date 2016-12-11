@@ -13,9 +13,9 @@ var AddJob = React.createClass({
   handleAdd: function(e){
     e.preventDefault();
     var hwChecked = this.inputHW.checked?"YES":"";
-
-    var cavityDueDisplayDate = this.inputCavityDueDate.value==null?"":this.formatToDisplayDate(this.inputCavityDueDate.value);
-    var jobDueDisplayDate = this.inputJobDueDate.value==null?"":this.formatToDisplayDate(this.inputJobDueDate.value);
+    console.log("cavityDueDate:" + cavityDueDate);
+    var cavityDueDisplayDate = !this.inputCavityDueDate.value?"":this.formatToDisplayDate(this.inputCavityDueDate.value);
+    var jobDueDisplayDate = !this.inputJobDueDate.value?"":this.formatToDisplayDate(this.inputJobDueDate.value);
     // console.log((new Date(cavityDueDisplayDate)).toUTCString());
 
     var tempJob = {

@@ -87,18 +87,16 @@ var MainInterface = React.createClass({
   }, //openAllJobsWindow
 
   completeMessage: function(item){
-    var allJobs = this.state.myJobs;
+    var allJobs = _.sortBy(this.state.myJobs, ["jobNumber"]);
     var itemIndex = _.findIndex(allJobs, item);
     var newJobs = _.without(allJobs, item);
 
-    sortedNewJobs = _.sortBy(newJobs,["jobNumber"]);
-
-    for (i=itemIndex; i<sortedNewJobs.length; i++){
-      sortedNewJobs[i].jobNumber = Number(sortedNewJobs[i].jobNumber) - 1;
+    for (i=itemIndex; i<newJobs.length; i++){
+      newJobs[i].jobNumber = Number(newJobs[i].jobNumber) - 1;
     }
 
     this.setState ({
-      myJobs: sortedNewJobs,
+      myJobs: newJobs,
       completedJob: item
     });
     ipc.sendSync("updatedJobsData");
