@@ -30,7 +30,7 @@ var MainInterface = React.createClass({
 
   render: function(){
     var filteredJobs = [];
-    var queryText = this.state.queryText;
+    var queryText = this.state.queryText.toLowerCase();
     var myCompletedJobs = this.state.myCompletedJobs;
     var orderBy = this.state.orderBy;
     var orderDirection = this.state.direction;

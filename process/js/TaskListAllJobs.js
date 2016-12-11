@@ -15,9 +15,9 @@ var TaskListAllJobs = React.createClass({
             <span className="task-date-item"><span className="task-date-label">Job Due: </span> {this.props.singleItem.jobDueDate}</span>
           </div>
           <div className="taskType-item">
-           <span className="taskType-label">Door Type: </span> {this.props.singleItem.doorType}
+           <span className="taskType-label">Door Type: </span> {this.props.singleItem.doorType} {this.props.singleItem.doorTypeText}
            <span className="taskType-spacer">   </span>
-           <span className="taskType-label">Jamb Type: </span> {this.props.singleItem.jambType}
+           <span className="taskType-label">Jamb Type: </span> {this.props.singleItem.jambType} {this.props.singleItem.jambTypeText}
            <span className="taskType-spacer">   </span>
            <span className="taskType-spacer">   </span>
            <span className="taskType-label">Open Tops: </span> {this.props.singleItem.openTops}

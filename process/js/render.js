@@ -88,10 +88,17 @@ var MainInterface = React.createClass({
 
   completeMessage: function(item){
     var allJobs = this.state.myJobs;
+    var itemIndex = _.findIndex(allJobs, item);
     var newJobs = _.without(allJobs, item);
-    console.log("In the Jobs Complete");
+
+    sortedNewJobs = _.sortBy(newJobs,["jobNumber"]);
+
+    for (i=itemIndex; i<sortedNewJobs.length; i++){
+      sortedNewJobs[i].jobNumber = Number(sortedNewJobs[i].jobNumber) - 1;
+    }
+
     this.setState ({
-      myJobs: newJobs,
+      myJobs: sortedNewJobs,
       completedJob: item
     });
     ipc.sendSync("updatedJobsData");
@@ -140,7 +147,7 @@ var MainInterface = React.createClass({
 
   render: function(){
     var filteredJobs = [];
-    var queryText = this.state.queryText;
+    var queryText = this.state.queryText.toLowerCase();
 
     var myJobs = this.state.myJobs;
     var myCompletedJobs = this.state.myCompletedJobs;

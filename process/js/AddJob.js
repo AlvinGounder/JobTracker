@@ -6,14 +6,13 @@ var AddJob = React.createClass({
   },
   formatToDisplayDate: function (date){
     var daysInWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var formatDate = new Date(date);
-    return daysInWeek[formatDate.getDay()] + " " + formatDate.getDate() + "-" + (formatDate.getMonth()+1) + "-" + formatDate.getFullYear();
+    return daysInWeek[formatDate.getDay()] + " " + formatDate.getDate() + "-" + (monthNames[formatDate.getMonth()]) + "-" + formatDate.getFullYear();
   },
   handleAdd: function(e){
     e.preventDefault();
     var hwChecked = this.inputHW.checked?"YES":"";
-    var doorTypeText = !this.inputDoorTypeText.value?"":" *" + this.inputDoorTypeText.value;
-    var jambTypeText = !this.inputJambTypeText.value==null?"":" *" + this.inputJambTypeText.value;
 
     var cavityDueDisplayDate = this.inputCavityDueDate.value==null?"":this.formatToDisplayDate(this.inputCavityDueDate.value);
     var jobDueDisplayDate = this.inputJobDueDate.value==null?"":this.formatToDisplayDate(this.inputJobDueDate.value);
@@ -22,8 +21,10 @@ var AddJob = React.createClass({
     var tempJob = {
       jobNumber : this.inputJobNumber.value,
       jobName : this.inputJobName.value,
-      doorType : this.inputDoorType.value + doorTypeText,
-      jambType : this.inputJambType.value + jambTypeText,
+      doorType : this.inputDoorType.value,
+      doorTypeText: this.inputDoorTypeText.value,
+      jambType : this.inputJambType.value,
+      jambTypeText: this.inputJambTypeText.value,
       SCS : this.inputSCS.value,
       DCS : this.inputDCS.value,
       jobDueDate : jobDueDisplayDate,
@@ -44,6 +45,8 @@ var AddJob = React.createClass({
     this.inputJobName.value = "";
     this.inputSCS.value = "";
     this.inputDCS.value = "";
+    this.inputDoorTypeText.value = "";
+    this.inputJambTypeText.value = "";
     this.inputJobDueDate.value = "";
     this.inputCavityDueDate.value = "";
     this.inputHW.checked = false;

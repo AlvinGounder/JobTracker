@@ -17,7 +17,7 @@ app.on('ready', function() {
   var appWindow, infoWindow, allJobsWindow, completedJobsWindow, editJobWindow;
   appWindow = new BrowserWindow({
     width: 1920,
-    width: 1080,
+    height: 1080,
     show: false
   }); //appWindow
 
@@ -35,7 +35,7 @@ app.on('ready', function() {
 
   allJobsWindow = new BrowserWindow({
     width: 1920,
-    width: 1080,
+    height: 1080,
     show: false
   }); //allJobsWindow
   allJobsWindow.setMenu(null);
@@ -44,7 +44,7 @@ app.on('ready', function() {
 
   completedJobsWindow = new BrowserWindow({
     width: 1920,
-    width: 1080,
+    height: 1080,
     show: false
   }); //completedJobsWindow
   // completedJobsWindow.setMenu(null);
@@ -120,6 +120,8 @@ app.on('ready', function() {
 
   ipc.on("exitEditWindow", function(event, arg){
     editJobWindow.close();
+    appWindow.reload();
+    if(!allJobsWindow.isDestroyed()) allJobsWindow.reload();
     event.returnValue='';
   });
 
@@ -135,9 +137,10 @@ app.on('ready', function() {
       height: 550,
       show: false,
       parent: appWindow,
-      modal: true
-      // frame: false
+      modal: true,
+      frame: false
     }); //infoWindow
+    editJobWindow.setMenu(null);
     editJobWindow.loadURL('file://' + __dirname + '/editJob.html');
     editJobWindow.webContents.send('theEditJob', arg);
 
