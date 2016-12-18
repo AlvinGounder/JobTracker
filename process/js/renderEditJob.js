@@ -20,8 +20,8 @@ var MainInterface = React.createClass({
         var cavityDueDate = this.formatFromDisplayDate(loadEditJob[0].cavityDueDate);
 
         // console.log("jobDue: " + jobDueDate);
-        // console.log("cavityDue: " + cavityDueDate);
-        var hardware = !loadEditJob[0].hardware=="YES"?false:true;
+        // console.log("loadEditJob: " + JSON.stringify(loadEditJob[0]));
+        var hardware = !loadEditJob[0].hardware?false:true;
         /*  -- End Format -- */
 
 
@@ -40,7 +40,7 @@ var MainInterface = React.createClass({
   }, //getInitialState
 
   handleEdit: function(){
-    console.log( "Saving Changes..");
+    // console.log( "Saving Changes..");
 
     // Remove the job being edited from the all Jobs list
     var updatedJobs = this.state.allJobs;
@@ -48,18 +48,21 @@ var MainInterface = React.createClass({
 
     var itemIndex = _.findIndex(updatedJobs, editJobs);
     var removedItem = updatedJobs.splice(itemIndex, 1);
-    console.log ("removedItem is:" + removedItem);
+    // console.log ("removedItem is:" + removedItem);
 
-    // console.log("itemIndex: " + itemIndex);
-    // console.log ("allJobs: " + JSON.stringify(this.state.allJobs));
-    // console.log ("updateJobs: " + JSON.stringify(updatedJobs));
     var editedJob = this.state.editJob;
     /* -- Pre-Save formatting --*/
-    console.log(this.state.editJob.jobDueDate);
-    console.log(this.state.editJob.cavityDueDate);
+
     editedJob.jobDueDate    = !this.state.editJob.jobDueDate?"":this.formatToDisplayDate(this.state.editJob.jobDueDate);
     editedJob.cavityDueDate = !this.state.editJob.cavityDueDate?"":this.formatToDisplayDate(this.state.editJob.cavityDueDate);
-    if (editedJob.cavityDueDate.indexOf("NaN-NaN-NaN")) editedJob.cavityDueDate="";
+
+    if (editedJob.cavityDueDate.indexOf("NaN") >= 0) {
+      editedJob.cavityDueDate="";
+    }
+
+    if (editedJob.jobDueDate.indexOf("NaN") >= 0) {
+      editedJob.jobDueDate="";
+    }
 
     editedJob.hardware      = this.state.editJob.hardware?"YES":"";
 
@@ -69,20 +72,17 @@ var MainInterface = React.createClass({
     updatedJobs.push(editedJob);
 
     //Write the Updated Jobs list to the file
-    // console.log ("To be written: " + JSON.stringify(updatedJobs));
     fs.writeFileSync(jobsLocation, JSON.stringify(updatedJobs), 'utf8',
       function(err){
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
         }
-        // console.log("Saved File");
     });
 
-
-    // Call the Cancel Function to clean up other Tasks
+    // Call the Cancel Function to clean up and go back to main screen
     this.handleCancel();
 
-  },
+  }, //handleEdit
 
   formatFromDisplayDate: function (date){
     var daysInWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -328,8 +328,8 @@ var MainInterface = React.createClass({
                   <option value="Thames  U/Groove">Thames  U/Groove</option>
                   <option value="Waterfront  U/Groove">Waterfront  U/Groove</option>
                   <option value=" ">-----------------------</option>
-                  <option value="Avon  V/Groove">Avon  U/Groove</option>
-                  <option value="Headland  V/Groove">Headland  U/Groove</option>
+                  <option value="Avon  V/Groove">Avon  V/Groove</option>
+                  <option value="Headland  V/Groove">Headland  V/Groove</option>
                   <option value=" ">-----------------------</option>
                   <option value="Atoll  V/Groove">Atoll  V/Groove</option>
                   <option value="Brook  V/Groove">Brook  V/Groove</option>

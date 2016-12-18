@@ -15,6 +15,10 @@ function toggleWindow(whichWindow) {
 
 app.on('ready', function() {
   var appWindow, infoWindow, allJobsWindow, completedJobsWindow, editJobWindow;
+  var electronScreen = electron.screen;
+  var secondDisplay = electronScreen.getAllDisplays()[1];  //Hardcoding the 2nd display for showing the All Jobs Window. !!=> What happens if second display does NOT exist?
+  var secondDisplaySize = secondDisplay.workAreaSize;
+
   appWindow = new BrowserWindow({
     width: 1920,
     height: 1080,
@@ -34,8 +38,10 @@ app.on('ready', function() {
   infoWindow.loadURL('file://' + __dirname + '/info.html');
 
   allJobsWindow = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    x: secondDisplay.bounds.x,
+    y: secondDisplay.bounds.y,
+    width: secondDisplaySize.width,
+    height: secondDisplaySize.height,
     show: false
   }); //allJobsWindow
   allJobsWindow.setMenu(null);
@@ -88,8 +94,10 @@ app.on('ready', function() {
   ipc.on('openAllJobsWindow', function(event, arg){
     if(allJobsWindow.isDestroyed()) {
       allJobsWindow = new BrowserWindow({
-        width: 1920,
-        width: 1080,
+        x: secondDisplay.bounds.x,
+        y: secondDisplay.bounds.y,
+        width: secondDisplaySize.width,
+        height: secondDisplaySize.height,
         show: false
       }); //allJobsWindow
       allJobsWindow.loadURL('file://' + __dirname + '/allJobs.html');
@@ -134,7 +142,7 @@ app.on('ready', function() {
   ipc.on('editJob', function(event, arg){
     editJobWindow = new BrowserWindow({
       width: 800,
-      height: 550,
+      height: 530,
       show: false,
       parent: appWindow,
       modal: true,
