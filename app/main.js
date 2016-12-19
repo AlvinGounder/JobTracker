@@ -16,8 +16,18 @@ function toggleWindow(whichWindow) {
 app.on('ready', function() {
   var appWindow, infoWindow, allJobsWindow, completedJobsWindow, editJobWindow;
   var electronScreen = electron.screen;
-  var secondDisplay = electronScreen.getAllDisplays()[1];  //Hardcoding the 2nd display for showing the All Jobs Window. !!=> What happens if second display does NOT exist?
-  var secondDisplaySize = secondDisplay.workAreaSize;
+  var secondDisplay;
+  var secondDisplaySize;
+
+  if (electronScreen.getAllDisplays().length > 1){
+    secondDisplay = electronScreen.getAllDisplays()[1];  //Hardcoding the 2nd display for showing the All Jobs Window.
+    secondDisplaySize = secondDisplay.workAreaSize;
+  }
+  else {
+    secondDisplay = electronScreen.getAllDisplays()[0];  //Only 1 display so set the second Display as the primary display
+    secondDisplaySize = secondDisplay.workAreaSize;
+  }
+
 
   appWindow = new BrowserWindow({
     width: 1920,

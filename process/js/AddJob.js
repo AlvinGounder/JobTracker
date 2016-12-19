@@ -86,7 +86,7 @@ var AddJob = React.createClass({
               <div className="form-group">
                 <label className="col-sm-3 control-label" htmlFor="doorType">Door Type</label>
                 <div className="col-sm-5">
-                  <select className="form-control" id="doorType" ref={(ref) => this.inputDoorType = ref}>
+                  <select className="form-control" id="doorType" defaultValue="Avon  U/Groove" ref={(ref) => this.inputDoorType = ref}>
                     <option value="Flush Panel">Flush Panel</option>
                     <option value="Flush Panel  4.75">Flush Panel  4.75</option>
                     <option value=" ">-----------------------</option>
@@ -156,7 +156,7 @@ var AddJob = React.createClass({
               <div className="form-group">
                 <label className="col-sm-3 control-label" htmlFor="jambType">Jamb Type</label>
                 <div className="col-sm-5">
-                  <select className="form-control" id="jambType" ref={(ref) => this.inputJambType = ref}>
+                  <select className="form-control" id="jambType" defaultValue="Archfast 40mm Bev" ref={(ref) => this.inputJambType = ref}>
                     <option value="Flat for Architrave 18">Flat for Architrave 18</option>
                     <option value="Flat double groove 18">Flat double groove 18</option>
                     <option value="Flat double groove 25">Flat double groove 25</option>

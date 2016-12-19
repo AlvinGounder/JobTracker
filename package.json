@@ -1,8 +1,8 @@
 {
   "name": "job-tracker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
-    "pack": "electron-packager . 'Job Tracker' --out ~/Desktop/jobTrackerApp --overwrite"
+    "pack": "electron-packager . 'Job Tracker' --out ~/Desktop/ --overwrite"
   },
   "main": "app/main.js",
   "devDependencies": {

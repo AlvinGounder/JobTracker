@@ -151,13 +151,13 @@ h1, h2, h3, h4, h5, h6 {
 .item-list {
   margin: 0;
   padding: 0;
-  list-style-type: decimal-leading-zero;
   font-size: 1.5rem;
   line-height: 115%;
 }
 
 .item-list .media {
   margin-top: 0;
+  padding: 5px;
 }
 
 .item-list .task-head {
@@ -165,10 +165,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .item-list .task-item {
-  padding: 0px;
-
+  padding: 10spx;
+  max-height: 104px;
 }
-
 
 .item-list .task-item:nth-child(odd) {
     background: rgba(0,255,0,.5);
@@ -252,11 +251,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   color: Blue;
   font-size: 1.4em;
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
 .row {
-  min-width: 1300px;
+  min-width: 1500px;
 }
 
 #page-info {
