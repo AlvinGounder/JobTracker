@@ -321,8 +321,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
-  src: url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
+  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot");
+  src: url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2") format('woff2'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff") format('woff'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf") format('truetype'), url("../../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
 }
 
 .glyphicon {
@@ -8374,7 +8374,7 @@ h6 {
 
 .interface {
   display: flex;
-  background: aqua;
+  /*background: rgba(0,255,0,.5);*/
 }
 
 .toolbar {
@@ -8436,24 +8436,24 @@ h6 {
 }
 
 .jobs {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .jobs .jobs-headline {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #174152;
 }
 
 .item-list {
   margin: 0;
   padding: 0;
-  list-style-type: decimal-leading-zero;
   font-size: 1.5rem;
-  line-height: 120%;
+  line-height: 115%;
 }
 
 .item-list .media {
   margin-top: 0;
+  padding: 5px;
 }
 
 .item-list .task-head {
@@ -8461,17 +8461,18 @@ h6 {
 }
 
 .item-list .task-item {
-  padding: 0px;
+  padding: 10spx;
+  max-height: 104px;
 }
 
 .item-list .task-item:nth-child(odd) {
-  background: rgba(255,255,0,.5);
-  border-radius: 5px;
+  background: rgba(0,255,0,.5);
+  border-radius: 1px;
 }
 
 .item-list .task-item:nth-child(even) {
-  background: rgba(0,255,255,.5);
-  border-radius: 5px;
+  background: white;
+  border-radius: 1px;
 }
 
 .item-list .task-item:last-child {
@@ -8491,8 +8492,8 @@ h6 {
 
 .item-list .task-name {
   font-weight: bold;
-  color: #296B73;
-  font-size: 1em;
+  color: Black;
+  font-size: 1.4em;
 }
 
 .item-list .taskType-label {
@@ -8505,7 +8506,8 @@ h6 {
 .item-list .taskType-item {
   color: Blue;
   font-size: 1em;
-  margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
   margin-left: 20px;
 }
 
@@ -8524,6 +8526,7 @@ h6 {
 
 .item-list .task-notes {
   font-style: normal;
+  color: red;
 }
 
 .item-list .label-item {
@@ -8535,14 +8538,18 @@ h6 {
 .item-list .task-date-label {
   color: black;
   font-weight: normal;
-  font-size: 1em;
+  /*font-size: 1.5em;*/
 }
 
 .item-list .task-date-item {
   font-weight: bold;
   color: Blue;
-  font-size: 1em;
-  margin-left: 100px;
+  font-size: 1.4em;
+  margin-left: 50px;
+}
+
+.row {
+  min-width: 1500px;
 }
 
 #page-info {

@@ -10,6 +10,9 @@ var TaskList = React.createClass({
   handleMoveDown: function(){
     this.props.onMoveDown(this.props.whichItem);
   },
+  handleEdit: function(){
+    this.props.onEdit(this.props.whichItem);
+  },
   render: function(){
     return (
       <li className="task-item media">
@@ -28,28 +31,33 @@ var TaskList = React.createClass({
             Down
           </button>
         </div>
+        <div className="media-left">
+          <button className="task-complete btn btn-xs btn-danger" onClick={this.handleEdit}>
+            Edit
+          </button>
+        </div>
         <div className="task-info media-body">
           <div className="task-head">
             <span className="task-name"></span>
             <span className="task-name">{this.props.singleItem.jobNumber}. {this.props.singleItem.jobName}</span>
             <span className="task-date-item"><span className="task-date-label">Cavity Due: </span> {this.props.singleItem.cavityDueDate}</span>
             <span className="task-date-item"><span className="task-date-label">Job Due: </span> {this.props.singleItem.jobDueDate}</span>
-            <span className="taskType-spacer">   </span>
-            <span className="taskType-label">Hardware: </span> {this.props.singleItem.hardware}
           </div>
           <div className="taskType-item">
-           <span className="taskType-label">Door Type: </span> {this.props.singleItem.doorType}
+           <span className="taskType-label">Door Type: </span> {this.props.singleItem.doorType}   {this.props.singleItem.doorTypeText}
            <span className="taskType-spacer">   </span>
-           <span className="taskType-label">Jamb Type: </span> {this.props.singleItem.jambType}
+           <span className="taskType-label">Jamb Type: </span> {this.props.singleItem.jambType}   {this.props.singleItem.jambTypeText}
            <span className="taskType-spacer">   </span>
            <span className="taskType-spacer">   </span>
            <span className="taskType-label">Open Tops: </span> {this.props.singleItem.openTops}
+           <span className="taskType-spacer">   </span>
+           <span className="taskType-label">Hardware: </span> {this.props.singleItem.hardware}
           </div>
           <div className="taskType-item">
             <span className="taskType-label">SCS: </span> {this.props.singleItem.SCS}
-            <span className="taskType-spacer">   </span>
+            <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">DCS: </span> {this.props.singleItem.DCS}
-            <span className="taskType-spacer">   </span>
+            <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">SSL: </span> {this.props.singleItem.SSL}
             <span className="taskType-smallSpacer">   </span>
             <span className="taskType-label">DSL: </span> {this.props.singleItem.DSL}

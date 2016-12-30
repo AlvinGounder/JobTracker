@@ -26,7 +26,8 @@ var MainInterface = React.createClass({
     var orderDirection = this.state.direction;
 
    myJobs = _.orderBy(myJobs, function(item){
-     return item[orderBy];
+    //  console.log(item[orderBy]);
+     return parseInt(item[orderBy]);
    }, orderDirection);
 
     myJobs = myJobs.map(function(item, index){
@@ -43,7 +44,6 @@ var MainInterface = React.createClass({
           <div className="container">
            <div className="row">
              <div className="jobs col-sm-12">
-               <h2 className="jobs-headline">All Jobs Schedule</h2>
                <ol className="item-list media-list">{myJobs}</ol>
              </div>{/* col-sm-12 */}
            </div>{/* row */}
