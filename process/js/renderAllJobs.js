@@ -15,20 +15,13 @@ var MainInterface = React.createClass({
   getInitialState: function(){
     return {
       myJobs: loadJobs,
-      orderBy: 'jobNumber',
       direction: 'asc',
     }
   }, //getInitialState
 
   render: function(){
     var myJobs = this.state.myJobs;
-    var orderBy = this.state.orderBy;
     var orderDirection = this.state.direction;
-
-   myJobs = _.orderBy(myJobs, function(item){
-    //  console.log(item[orderBy]);
-     return parseInt(item[orderBy]);
-   }, orderDirection);
 
     myJobs = myJobs.map(function(item, index){
       return (

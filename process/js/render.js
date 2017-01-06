@@ -65,8 +65,18 @@ var MainInterface = React.createClass({
   addJob: function(tempJob){
     var tempJobs = this.state.myJobs;
     tempJobs.push(tempJob);
+
+    //sort jobs list by date, then precedence
+    var sortedTempJobs = _.sortBy(tempJobs, function(node) {
+        return (new Date(node.jobDueDate).getTime());
+    });
+
+    for (var i = 0; i < sortedTempJobs.length; i++) {
+      sortedTempJobs[i].jobNumber = i+1;
+    }
+
     this.setState({
-      myJobs: tempJobs,
+      myJobs: sortedTempJobs,
       taskBodyVisible: false
     })
     ipc.sendSync("updatedJobsData");
@@ -158,9 +168,9 @@ var MainInterface = React.createClass({
       $('#addJob').modal('hide');
     }
 
-   myJobs = _.orderBy(myJobs, function(item){
-     return parseInt(item[orderBy]);
-   }, orderDirection);
+  //  myJobs = _.orderBy(myJobs, function(item){
+  //    return parseInt(item[orderBy]);
+  //  }, orderDirection);
 
    for (var i = 0; i < myJobs.length; i++) {
      if (myJobs[i].jobName.toLowerCase().indexOf(queryText) != -1){

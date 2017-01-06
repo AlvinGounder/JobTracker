@@ -20,7 +20,7 @@ app.on('ready', function() {
   var secondDisplaySize;
 
   if (electronScreen.getAllDisplays().length > 1){
-    secondDisplay = electronScreen.getAllDisplays()[1];  //Hardcoding the 2nd display for showing the All Jobs Window. !!=> What happens if second display does NOT exist?
+    secondDisplay = electronScreen.getAllDisplays()[1];  //Hardcoding the 2nd display for showing the All Jobs Window.
     secondDisplaySize = secondDisplay.workAreaSize;
   }
   else {

@@ -71,8 +71,17 @@ var MainInterface = React.createClass({
     // Add the updated job to the All Jobs list
     updatedJobs.push(editedJob);
 
+    //sort jobs list by date, then precedence
+    var sortedTempJobs = _.sortBy(updatedJobs, function(node) {
+        return (new Date(node.jobDueDate).getTime());
+    });
+
+    for (var i = 0; i < sortedTempJobs.length; i++) {
+      sortedTempJobs[i].jobNumber = i+1;
+    }
+    
     //Write the Updated Jobs list to the file
-    fs.writeFileSync(jobsLocation, JSON.stringify(updatedJobs), 'utf8',
+    fs.writeFileSync(jobsLocation, JSON.stringify(sortedTempJobs), 'utf8',
       function(err){
         if (err) {
           console.log("Saving Jobs failed with error: " + err);
@@ -274,8 +283,6 @@ var MainInterface = React.createClass({
   },
 
   render: function(){
-
-
     return(
       <div className="application">
         <div className="interface">
