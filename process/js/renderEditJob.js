@@ -15,22 +15,22 @@ var ReactDOM = require('react-dom');
 var MainInterface = React.createClass({
   getInitialState: function(){
 
-        /* -- Format / Parse variables to pre-populate fields -- */
+      /* -- Format/Parse variables to pre-populate fields -- */
         var jobDueDate = this.formatFromDisplayDate(loadEditJob[0].jobDueDate);
         var cavityDueDate = this.formatFromDisplayDate(loadEditJob[0].cavityDueDate);
-
-        // console.log("jobDue: " + jobDueDate);
-        // console.log("loadEditJob: " + JSON.stringify(loadEditJob[0]));
         var hardware = !loadEditJob[0].hardware?false:true;
-        /*  -- End Format -- */
+        var jobPriority = !loadEditJob[0].jobPriority?1:loadEditJob[0].jobPriority;  //This is to ensure that new priorities are at least set to 1 even if they don't currently exist.
+
+        // console.log("loadEditJob: " + JSON.stringify(loadEditJob[0]));
+      /*  -- End Format -- */
 
 
-        /* -- Push parsed values into new object -- */
+      /* -- Push parsed values into new object -- */
         var updatedJob = loadEditJob[0];
         updatedJob['jobDueDate'] = jobDueDate;
         updatedJob['cavityDueDate'] = cavityDueDate;
         updatedJob['hardware'] = hardware;
-        /* --  End Push new values -- */
+      /* --  End Push new values -- */
 
     return {
       allJobs: loadJobs,
@@ -71,15 +71,15 @@ var MainInterface = React.createClass({
     // Add the updated job to the All Jobs list
     updatedJobs.push(editedJob);
 
-    //sort jobs list by date, then precedence
-    var sortedTempJobs = _.sortBy(updatedJobs, function(node) {
+    //sort jobs list by date, then priority
+    var sortedTempJobs = _.sortBy(updatedJobs, [function(node) {
         return (new Date(node.jobDueDate).getTime());
-    });
+      }, "jobPriority"]);
 
     for (var i = 0; i < sortedTempJobs.length; i++) {
       sortedTempJobs[i].jobNumber = i+1;
     }
-    
+
     //Write the Updated Jobs list to the file
     fs.writeFileSync(jobsLocation, JSON.stringify(sortedTempJobs), 'utf8',
       function(err){
@@ -118,15 +118,6 @@ var MainInterface = React.createClass({
         }
     });
     ipc.sendSync("exitEditWindow");
-  },
-
-  handleJobNumberChange: function(event){
-    var EditedJob = this.state.editJob;
-    EditedJob['jobNumber'] = event.target.value;
-
-    this.setState({
-        editJob: EditedJob
-    })
   },
 
   handleJobNameChange: function(event){
@@ -195,6 +186,15 @@ var MainInterface = React.createClass({
     var EditedJob = this.state.editJob;
 
     EditedJob['jobDueDate'] = event.target.value;
+    this.setState({
+        editJob: EditedJob
+    })
+  },
+
+  handleJobPriorityChange: function(event){
+    var EditedJob = this.state.editJob;
+
+    EditedJob['jobPriority'] = event.target.value;
     this.setState({
         editJob: EditedJob
     })
@@ -288,13 +288,8 @@ var MainInterface = React.createClass({
         <div className="interface">
           <form className="edit-job form-horizontal">
             <div className="form-group">
-              <label className="col-sm-3 control-label" htmlFor="jobNumber">Job Number</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control"
-                  id="jobNumber" value={this.state.editJob.jobNumber} onChange={this.handleJobNumberChange} />
-              </div>
               <label className="col-sm-3 control-label" htmlFor="jobName">Job Name</label>
-              <div className="col-sm-4">
+              <div className="col-sm-7">
                 <input type="text" className="form-control"
                   id="jobName" value={this.state.editJob.jobName} onChange={this.handleJobNameChange} />
               </div>
@@ -412,18 +407,25 @@ var MainInterface = React.createClass({
                 <input type="date" className="form-control"
                   id="jobDueDate" value={this.state.editJob.jobDueDate} onChange={this.handleJobDueChange}/>
               </div>
+              <label className="col-sm-3 control-label" htmlFor="jobPriority">Priority</label>
+              <div className="col-sm-2">
+                <input type="number" className="form-control" min="1" max="9"
+                  id="jobDueDate" value={this.state.editJob.jobPriority} onChange={this.handleJobPriorityChange}/>
+              </div>
+            </div>
+            <div className="form-group">
               <label className="col-sm-2 control-label" htmlFor="cavityDueDate">Cav. Due</label>
               <div className="col-sm-4">
                 <input type="date" className="form-control"
                   id="cavityDueDate" value={this.state.editJob.cavityDueDate} onChange={this.handleCavityDueChange}/>
               </div>
-            </div>
-            <div className="form-group">
               <label className="col-sm-2 control-label" htmlFor="HW">HW</label>
               <div className="col-sm-1">
                 <input type="checkbox" className="form-control" value="YES"
                   id="HW" checked={this.state.editJob.hardware} onChange={this.handleHardwareChange}/>
               </div>
+            </div>
+            <div className="form-group">
               <label className="col-sm-1 control-label" htmlFor="SSL">SSL</label>
               <div className="col-sm-2">
                 <input type="text" className="form-control"

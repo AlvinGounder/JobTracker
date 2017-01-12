@@ -66,10 +66,10 @@ var MainInterface = React.createClass({
     var tempJobs = this.state.myJobs;
     tempJobs.push(tempJob);
 
-    //sort jobs list by date, then precedence
-    var sortedTempJobs = _.sortBy(tempJobs, function(node) {
+    //sort jobs list by date, then priority
+    var sortedTempJobs = _.sortBy(tempJobs, [function(node) {
         return (new Date(node.jobDueDate).getTime());
-    });
+    }, "jobPriority"]);
 
     for (var i = 0; i < sortedTempJobs.length; i++) {
       sortedTempJobs[i].jobNumber = i+1;
@@ -113,32 +113,6 @@ var MainInterface = React.createClass({
     ipc.sendSync("updatedCompletedData");
   },//completeMessage
 
-  moveItemUp: function(item){
-    var allJobs = this.state.myJobs;
-    var newItem = item;
-    newItem["jobNumber"] = item["jobNumber"]==1?1:Number(item["jobNumber"])-1;
-
-    var newJobs = _.without(allJobs, item);
-    newJobs.push(newItem);
-    this.setState ({
-      myJobs: newJobs
-    });
-    ipc.sendSync("updatedJobsData");
-  },//moveItemUp
-
-  moveItemDown: function(item){
-    var allJobs = this.state.myJobs;
-    var newItem = item;
-    newItem["jobNumber"] = Number(item["jobNumber"])+1;
-
-    var newJobs = _.without(allJobs, item);
-    newJobs.push(newItem);
-    this.setState ({
-      myJobs: newJobs
-    });
-    ipc.sendSync("updatedJobsData");
-  },//moveItemDown
-
   editJob: function(item){
     var editJob = JSON.parse(fs.readFileSync(editJobLocation));
     editJob.push(item);
@@ -151,7 +125,7 @@ var MainInterface = React.createClass({
     });
     item = null;
     ipc.sendSync("editJob");
-  },
+  }, //Edit Job
 
   render: function(){
     var filteredJobs = [];
@@ -159,8 +133,8 @@ var MainInterface = React.createClass({
 
     var myJobs = this.state.myJobs;
     var myCompletedJobs = this.state.myCompletedJobs;
-    var orderBy = this.state.orderBy;
-    var orderDirection = this.state.direction;
+    // var orderBy = this.state.orderBy;
+    // var orderDirection = this.state.direction;
 
     if (this.state.taskBodyVisible === true) {
       $('#addJob').modal('show');
@@ -184,8 +158,6 @@ var MainInterface = React.createClass({
         singleItem = {item}
         whichItem = {item}
         onComplete = {this.completeMessage}
-        onMoveUp = {this.moveItemUp}
-        onMoveDown = {this.moveItemDown}
         onEdit = {this.editJob}
       />
     )

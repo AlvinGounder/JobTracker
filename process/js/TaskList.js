@@ -4,12 +4,6 @@ var TaskList = React.createClass({
   handleComplete: function(){
     this.props.onComplete(this.props.whichItem);
   },
-  handleMoveUp: function(){
-    this.props.onMoveUp(this.props.whichItem);
-  },
-  handleMoveDown: function(){
-    this.props.onMoveDown(this.props.whichItem);
-  },
   handleEdit: function(){
     this.props.onEdit(this.props.whichItem);
   },
@@ -19,16 +13,6 @@ var TaskList = React.createClass({
         <div className="media-left">
           <button className="task-complete btn btn-xs btn-danger" onClick={this.handleComplete}>
             Complete
-          </button>
-        </div>
-        <div className="media-left">
-          <button className="task-complete btn btn-xs btn-danger" onClick={this.handleMoveUp}>
-            Up
-          </button>
-        </div>
-        <div className="media-left">
-          <button className="task-complete btn btn-xs btn-danger" onClick={this.handleMoveDown}>
-            Down
           </button>
         </div>
         <div className="media-left">
@@ -42,6 +26,8 @@ var TaskList = React.createClass({
             <span className="task-name">{this.props.singleItem.jobNumber}. {this.props.singleItem.jobName}</span>
             <span className="task-date-item"><span className="task-date-label">Cavity Due: </span> {this.props.singleItem.cavityDueDate}</span>
             <span className="task-date-item"><span className="task-date-label">Job Due: </span> {this.props.singleItem.jobDueDate}</span>
+            <span className="taskType-spacer">   </span>
+            <span className="taskType-label">Priority: {this.props.singleItem.jobPriority}</span>
           </div>
           <div className="taskType-item">
            <span className="taskType-label">Door Type: </span> {this.props.singleItem.doorType}   {this.props.singleItem.doorTypeText}

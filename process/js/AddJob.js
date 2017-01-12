@@ -13,13 +13,12 @@ var AddJob = React.createClass({
   handleAdd: function(e){
     e.preventDefault();
     var hwChecked = this.inputHW.checked?"YES":"";
-    console.log("cavityDueDate:" + cavityDueDate);
+    // console.log("cavityDueDate:" + cavityDueDate);
     var cavityDueDisplayDate = !this.inputCavityDueDate.value?"":this.formatToDisplayDate(this.inputCavityDueDate.value);
     var jobDueDisplayDate = !this.inputJobDueDate.value?"":this.formatToDisplayDate(this.inputJobDueDate.value);
     // console.log((new Date(cavityDueDisplayDate)).toUTCString());
 
     var tempJob = {
-      jobNumber : this.inputJobNumber.value,
       jobName : this.inputJobName.value,
       doorType : this.inputDoorType.value,
       doorTypeText: this.inputDoorTypeText.value,
@@ -28,6 +27,7 @@ var AddJob = React.createClass({
       SCS : this.inputSCS.value,
       DCS : this.inputDCS.value,
       jobDueDate : jobDueDisplayDate,
+      jobPriority : this.inputJobPriority.value,
       cavityDueDate : cavityDueDisplayDate,
       hardware : hwChecked,
       SSL : this.inputSSL.value,
@@ -41,13 +41,13 @@ var AddJob = React.createClass({
 
     this.props.addJob(tempJob);
 
-    this.inputJobNumber.value = "";
     this.inputJobName.value = "";
     this.inputSCS.value = "";
     this.inputDCS.value = "";
     this.inputDoorTypeText.value = "";
     this.inputJambTypeText.value = "";
     this.inputJobDueDate.value = "";
+    this.inputJobPriority.value = "";
     this.inputCavityDueDate.value = "";
     this.inputHW.checked = false;
     this.inputSSL.value = "";
@@ -72,13 +72,8 @@ var AddJob = React.createClass({
 
             <form className="modal-body add-job form-horizontal" onSubmit={this.handleAdd}>
               <div className="form-group">
-                <label className="col-sm-3 control-label" htmlFor="jobNumber">Job Number</label>
-                <div className="col-sm-2">
-                  <input type="text" className="form-control"
-                    id="jobNumber" ref={(ref) => this.inputJobNumber = ref}/>
-                </div>
                 <label className="col-sm-3 control-label" htmlFor="jobName">Job Name</label>
-                <div className="col-sm-4">
+                <div className="col-sm-7">
                   <input type="text" className="form-control"
                     id="jobName" ref={(ref) => this.inputJobName = ref} />
                 </div>
@@ -196,18 +191,25 @@ var AddJob = React.createClass({
                   <input type="date" className="form-control"
                     id="jobDueDate" ref={(ref) => this.inputJobDueDate = ref}/>
                 </div>
+                <label className="col-sm-2 control-label" htmlFor="jobPriority">Priority</label>
+                <div className="col-sm-2">
+                  <input type="number" className="form-control" min="1" max="9"
+                    id="jobPriority" ref={(ref) => this.inputJobPriority = ref}/>
+                </div>
+              </div>
+              <div className="form-group">
                 <label className="col-sm-2 control-label" htmlFor="cavityDueDate">Cav. Due</label>
                 <div className="col-sm-4">
                   <input type="date" className="form-control"
                     id="cavityDueDate" ref={(ref) => this.inputCavityDueDate = ref}/>
                 </div>
-              </div>
-              <div className="form-group">
                 <label className="col-sm-2 control-label" htmlFor="HW">HW</label>
                 <div className="col-sm-1">
                   <input type="checkbox" className="form-control" value="YES"
                     id="HW" ref={(ref) => this.inputHW = ref}/>
                 </div>
+              </div>
+              <div className="form-group">
                 <label className="col-sm-1 control-label" htmlFor="SSL">SSL</label>
                 <div className="col-sm-2">
                   <input type="text" className="form-control"
